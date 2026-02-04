@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<title>Blog - GA4 GTM Demo</title>
+
+<script>
+window.dataLayer=window.dataLayer||[];
+dataLayer.push({
+event:"page_view_custom",
+page:{
+name:"blog",
+section:"content",
+type:"blogPage",
+url:window.location.href,
+title:document.title
+},
+timestamp:new Date().toISOString()
+});
+</script>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html" data-dl-action="nav_home">Home</a>
+<a href="about.html" data-dl-action="nav_about">About</a>
+<a href="blog.html" data-dl-action="nav_blog">Blog</a>
+<a href="services.html" data-dl-action="nav_services">Services</a>
+<a href="contact.html" data-dl-action="nav_contact">Contact</a>
+</nav>
+
+<h2>Blog Articles</h2>
+
+<a href="#" data-dl-action="blog_post_1">Read GA4 Basics</a><br>
+<a href="#" data-dl-action="blog_post_2">Read GTM Advanced</a>
+
+<script>
+(function(){
+document.addEventListener("click",function(e){
+var el=e.target;
+while(el&&el!==document){
+if(el.getAttribute("data-dl-action")){
+dataLayer.push({
+event:"custom_click",
+click:{
+action:el.getAttribute("data-dl-action"),
+text:(el.innerText||"").trim(),
+url:el.getAttribute("href")||""
+},
+page:{name:"blog"},
+timestamp:new Date().toISOString()
+});
+return;
+}
+el=el.parentNode;
+}
+});
+})();
+</script>
+
+</body>
+</html>
