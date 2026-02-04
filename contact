@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<title>Contact - GA4 GTM Demo</title>
+
+<script>
+window.dataLayer=window.dataLayer||[];
+dataLayer.push({
+event:"page_view_custom",
+page:{
+name:"contact",
+section:"lead",
+type:"contactPage",
+url:window.location.href,
+title:document.title
+},
+timestamp:new Date().toISOString()
+});
+</script>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html" data-dl-action="nav_home">Home</a>
+<a href="about.html" data-dl-action="nav_about">About</a>
+<a href="blog.html" data-dl-action="nav_blog">Blog</a>
+<a href="services.html" data-dl-action="nav_services">Services</a>
+<a href="contact.html" data-dl-action="nav_contact">Contact</a>
+</nav>
+
+<h2>Contact Us</h2>
+
+<button data-dl-action="submit_contact_form">
+Submit Form (Demo)
+</button>
+
+<script>
+(function(){
+document.addEventListener("click",function(e){
+var el=e.target;
+while(el&&el!==document){
+if(el.getAttribute("data-dl-action")){
+dataLayer.push({
+event:"custom_click",
+click:{
+action:el.getAttribute("data-dl-action"),
+text:(el.innerText||"").trim(),
+url:""
+},
+page:{name:"contact"},
+timestamp:new Date().toISOString()
+});
+alert("Form submitted (demo)");
+return;
+}
+el=el.parentNode;
+}
+});
+})();
+</script>
+
+</body>
+</html>
