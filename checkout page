@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<title>Checkout - GA4 GTM Demo</title>
+
+<script>
+window.dataLayer=window.dataLayer||[];
+dataLayer.push({
+ event:"begin_checkout",
+ ecommerce:{
+  items:[{
+   item_id:"P001",
+   item_name:"GA4 Course",
+   price:1999,
+   quantity:1
+  }]
+ }
+});
+</script>
+</head>
+
+<body>
+
+<h2>Checkout</h2>
+
+<button id="payNow">Pay Now</button>
+
+<script>
+document.getElementById("payNow").addEventListener("click",function(){
+window.location.href="thankyou.html";
+});
+</script>
+
+</body>
+</html>
