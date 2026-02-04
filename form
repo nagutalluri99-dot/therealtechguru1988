@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Form Tracking - GA4 GTM Demo</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- ========================= -->
+<!-- ADD GTM or GA4 HERE -->
+<!-- ========================= -->
+<!-- Paste GTM Head snippet OR gtag.js here -->
+
+<!-- ========================= -->
+<!-- DATA LAYER : PAGE LOAD -->
+<!-- ========================= -->
+<script>
+window.dataLayer = window.dataLayer || [];
+
+dataLayer.push({
+  event: "page_view_custom",
+  page: {
+    name: "form_tracking",
+    section: "lead",
+    type: "formPage",
+    url: window.location.href,
+    title: document.title,
+    environment: "demo"
+  },
+  timestamp: new Date().toISOString()
+});
+</script>
+
+<style>
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  margin:0;
+  background:#f5f7fb;
+}
+header{
+  background:#fff;
+  padding:14px 18px;
+  border-bottom:1px solid #ddd;
+}
+nav a{
+  margin-left:12px;
+  color:#0070f3;
+  text-decoration:none;
+  font-weight:600;
+}
+main{
+  max-width:900px;
+  margin:20px auto;
+}
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:10px;
+}
+input, select{
+  width:100%;
+  padding:10px;
+  margin:8px 0 14px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+button{
+  padding:10px 14px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  background:#fff;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>GA4 GTM Demo Site</h2>
+<nav>
+<a href="index.html" data-dl-action="nav_home">Home</a>
+<a href="about.html" data-dl-action="nav_about">About</a>
+<a href="blog.html" data-dl-action="nav_blog">Blog</a>
+<a href="services.html" data-dl-action="nav_services">Services</a>
+<a href="contact.html" data-dl-action="nav_contact">Contact</a>
+<a href="form.html" data-dl-action="nav_form">Form Demo</a>
+</nav>
+</header>
+
+<main>
+
+<div class="card">
+
+<h2>Contact Form (Tracking Demo)</h2>
+
+<form id="demoForm">
+
+<label>Name</label>
+<input type="text" id="name" required>
+
+<label>Email</label>
+<input type="email" id="email" required>
+
+<label>Service Interested In</label>
+<select id="service">
+  <option value="ga4">GA4 Implementation</option>
+  <option value="gtm">GTM Setup</option>
+  <option value="reporting">Reporting</option>
+</select>
+
+<button type="submit" data-dl-action="form_submit_click">
+Submit Form
+</button>
+
+</form>
+
+</div>
+
+</main>
+
+<footer style="text-align:center;margin:30px 0;color:#555">
+© Demo Company
+</footer>
+
+<!-- ========================= -->
+<!-- FORM SUBMIT TRACKING -->
+<!-- ========================= -->
+
+<script>
+document.getElementById("demoForm").addEventListener("submit", function(e){
+
+  e.preventDefault(); // stop real submission (demo)
+
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var service = document.getElementById("service").value;
+
+  window.dataLayer.push({
+    event: "form_submit",
+    form: {
+      name: "contact_form",
+      page: "form_tracking",
+      selected_service: service,
+      has_email: email ? "yes" : "no"
+    },
+    timestamp: new Date().toISOString()
+  });
+
+  alert("Form submitted (demo only)");
+
+  // reset form
+  this.reset();
+
+});
+</script>
+
+<!-- ========================= -->
+<!-- OPTIONAL CLICK TRACKING (same logic as other pages) -->
+<!-- ========================= -->
+
+<script>
+(function(){
+
+  document.addEventListener("click", function(e){
+
+    var el = e.target;
+
+    while(el && el !== document){
+
+      if(el.getAttribute && el.getAttribute("data-dl-action")){
+
+        dataLayer.push({
+          event: "custom_click",
+          click: {
+            action: el.getAttribute("data-dl-action"),
+            element_text: (el.innerText || "").trim(),
+            element_url: el.getAttribute("href") || ""
+          },
+          page: {
+            name: "form_tracking"
+          },
+          timestamp: new Date().toISOString()
+        });
+
+        return;
+      }
+
+      el = el.parentNode;
+    }
+
+  });
+
+})();
+</script>
+
+</body>
+</html>
