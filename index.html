@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home - GA4 GTM Demo Site</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ========================= -->
+<!-- ADD GTM OR GA4 HERE -->
+<!-- ========================= -->
+<!-- Paste GTM head snippet OR GA4 gtag.js here -->
+
+<!-- ========================= -->
+<!-- DATA LAYER : PAGE LOAD -->
+<!-- ========================= -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  dataLayer.push({
+    event: "page_view_custom",
+    page: {
+      name: "home",
+      section: "home",
+      type: "landingPage",
+      url: window.location.href,
+      title: document.title,
+      language: "en",
+      country: "IN",
+      environment: "demo"
+    },
+    timestamp: new Date().toISOString()
+  });
+</script>
+
+<style>
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  margin:0;
+  background:#f5f7fb;
+  color:#111;
+}
+header{
+  background:#fff;
+  padding:14px 18px;
+  border-bottom:1px solid #e6e9ee;
+}
+nav a{
+  margin-left:12px;
+  color:#0070f3;
+  text-decoration:none;
+  font-weight:600;
+}
+nav a:hover{
+  text-decoration:underline;
+}
+main{
+  max-width:940px;
+  margin:20px auto;
+  padding:0 16px;
+}
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:10px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.05);
+}
+.btn{
+  padding:10px 14px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  background:#fff;
+  cursor:pointer;
+  margin-right:8px;
+}
+footer{
+  text-align:center;
+  margin:30px 0;
+  color:#555;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- GTM BODY SNIPPET HERE -->
+<!-- ========================= -->
+<!-- Paste GTM body snippet here -->
+
+<header>
+<div style="max-width:940px;margin:0 auto;display:flex;justify-content:space-between;align-items:center">
+
+<h1 style="margin:0;font-size:18px">
+GA4 + GTM Demo Website
+</h1>
+
+<nav>
+<a href="index.html" data-dl-action="nav_home">Home</a>
+<a href="about.html" data-dl-action="nav_about">About</a>
+<a href="blog.html" data-dl-action="nav_blog">Blog</a>
+<a href="services.html" data-dl-action="nav_services">Services</a>
+<a href="contact.html" data-dl-action="nav_contact">Contact</a>
+<a href="form.html" data-dl-action="nav_form">Form Demo</a>
+<a href="shop.html" data-dl-action="nav_shop">Shop</a>
+</nav>
+
+</div>
+</header>
+
+<main>
+
+<section class="card">
+
+<h2>Welcome to GA4 & GTM Demo Site</h2>
+
+<p>
+This website is built to demonstrate:
+</p>
+
+<ul>
+<li>GA4 Event Tracking</li>
+<li>Google Tag Manager Implementation</li>
+<li>Data Layer Usage</li>
+<li>Form & Ecommerce Events</li>
+</ul>
+
+<p>
+Use the navigation menu to move between pages and generate tracking events.
+</p>
+
+<p>
+<button class="btn" data-dl-action="home_get_started">
+Get Started
+</button>
+
+<button class="btn" data-dl-action="home_learn_more">
+Learn More
+</button>
+</p>
+
+</section>
+
+</main>
+
+<footer>
+© Demo Company — GA4 & GTM Training
+</footer>
+
+<!-- ========================= -->
+<!-- GLOBAL CLICK TRACKING -->
+<!-- ========================= -->
+
+<script>
+(function () {
+
+  document.addEventListener("click", function (e) {
+
+    var el = e.target;
+
+    while (el && el !== document) {
+
+      if (el.getAttribute && el.getAttribute("data-dl-action")) {
+
+        var action = el.getAttribute("data-dl-action");
+        var href = el.getAttribute("href") || "";
+
+        window.dataLayer.push({
+          event: "custom_click",
+          click: {
+            action: action,
+            element_tag: el.tagName.toLowerCase(),
+            element_text: (el.innerText || "").trim(),
+            element_url: href
+          },
+          page: {
+            name: "home"
+          },
+          timestamp: new Date().toISOString()
+        });
+
+        return;
+      }
+
+      el = el.parentNode;
+    }
+
+  }, false);
+
+})();
+</script>
+
+</body>
+</html>
