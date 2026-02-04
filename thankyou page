@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<title>Thank You - GA4 GTM Demo</title>
+
+<script>
+window.dataLayer=window.dataLayer||[];
+dataLayer.push({
+ event:"purchase",
+ ecommerce:{
+  transaction_id:"T12345",
+  value:1999,
+  currency:"INR",
+  items:[{
+   item_id:"P001",
+   item_name:"GA4 Course",
+   price:1999,
+   quantity:1
+  }]
+ }
+});
+</script>
+</head>
+
+<body>
+
+<h2>Thank you for your purchase!</h2>
+<p>Order ID: T12345</p>
+
+<a href="shop.html">Back to shop</a>
+
+</body>
+</html>
