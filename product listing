@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<title>Shop - GA4 GTM Demo</title>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+dataLayer.push({
+ event:"page_view_custom",
+ page:{name:"shop",type:"product_list"}
+});
+</script>
+</head>
+
+<body>
+
+<h2>Shop Products</h2>
+
+<a href="product.html" data-dl-action="select_product_1">
+GA4 Course - ₹1999
+</a>
+
+<script>
+document.addEventListener("click",function(e){
+var el=e.target;
+if(el.getAttribute("data-dl-action")){
+
+dataLayer.push({
+ event:"select_item",
+ ecommerce:{
+  items:[{
+   item_id:"P001",
+   item_name:"GA4 Course",
+   price:1999,
+   item_category:"Training"
+  }]
+ }
+});
+}
+});
+</script>
+
+</body>
+</html>
